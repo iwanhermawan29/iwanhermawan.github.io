@@ -1,0 +1,183 @@
+<html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow" />
+  <meta name="theme-color" content="#0b1220" />
+  <title>Portofolio — Sedang Perawatan</title>
+  <meta name="description" content="Portofolio sedang dalam perawatan. Kami sedang menyiapkan sesuatu yang lebih cepat, rapi, dan aman." />
+  <meta property="og:title" content="Portofolio — Sedang Perawatan" />
+  <meta property="og:description" content="Situs akan segera kembali lebih baik dari sebelumnya." />
+  <meta property="og:type" content="website" />
+  <style>
+    :root{
+      --brand: #16a34a;   /* ganti warna brand utama di sini */
+      --accent:#22c55e;   /* aksen animasi */
+      --bg:#0b1220;
+      --fg:#e5e7eb;
+      --muted:#9ca3af;
+      --card:#111827;
+    }
+    @media (prefers-color-scheme: light){
+      :root{
+        --bg:#f8fafc; --fg:#0f172a; --muted:#334155; --card:#ffffff;
+      }
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Ubuntu, "Helvetica Neue", Arial, sans-serif;
+      color:var(--fg);
+      background:
+        radial-gradient(60% 60% at 50% 40%, rgba(34,197,94,.14), transparent 55%),
+        linear-gradient(120deg, var(--bg), var(--bg) 40%, #0f172a 100%);
+      display:flex; align-items:center; justify-content:center; padding:24px;
+    }
+    .container{ width:min(960px, 100%); }
+
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+      border:1px solid rgba(255,255,255,.08);
+      border-radius: 24px;
+      backdrop-filter: blur(8px);
+      padding: 32px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.25);
+    }
+
+    .brand{ display:flex; align-items:center; gap:10px; margin-bottom:12px }
+    .brand .dot{ width:10px; height:10px; background:var(--accent); border-radius:50%; box-shadow: 0 0 12px var(--accent) }
+    .brand strong{ font-weight:700 }
+
+    h1{ font-size:clamp(28px,5vw,44px); margin:0 0 8px 0; letter-spacing:.2px }
+    p.lead{ font-size:clamp(14px,2.4vw,18px); color:var(--muted); margin:0 0 20px 0 }
+
+    .illustration{ position:relative; height:170px; display:grid; place-items:center; margin-bottom:8px }
+    .gear{ width:72px; height:72px; color:var(--accent) }
+    .small{ width:42px; height:42px; position:absolute; right:16%; top:40%; opacity:.9 }
+
+    @keyframes spin { to { transform: rotate(360deg) } }
+    .spin{ animation: spin 12s linear infinite }
+    .spin-rev{ animation: spin 9s linear infinite reverse }
+
+    .status{ display:flex; flex-wrap:wrap; gap:8px; margin:16px 0 24px }
+    .badge{ padding:6px 10px; border:1px dashed rgba(255,255,255,.22); border-radius:999px; font-size:12px; color:var(--muted) }
+
+    .progress{ height:8px; background:rgba(255,255,255,.08); border-radius:999px; overflow:hidden; margin: 10px 0 2px }
+    .progress > span{ display:block; height:100%; background: linear-gradient(90deg, var(--accent), #7dd3fc); width:45%; animation: load 2.5s ease-in-out infinite }
+    @keyframes load{ 0%{ width:15% } 50%{ width:65% } 100%{ width:15% } }
+
+    .actions{ display:flex; flex-wrap:wrap; gap:12px; margin-top:10px }
+    .button{ display:inline-flex; align-items:center; gap:10px; padding:10px 14px; border-radius:12px; border:1px solid rgba(255,255,255,.12); text-decoration:none; color:var(--fg) }
+    .button.primary{ background:var(--brand); border-color:transparent; color:white }
+    .button:hover{ transform: translateY(-1px) }
+
+    .footer{ margin-top:24px; font-size:12px; color:var(--muted); display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap }
+
+    /* Kartu kontak kecil */
+    .contact{ display:flex; gap:14px; flex-wrap:wrap; align-items:center }
+    .pill{ display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border-radius:999px; border:1px solid rgba(255,255,255,.12); font-size:12px; color:var(--muted) }
+    .pill svg{ width:14px; height:14px; opacity:.8 }
+
+    /* Sedikit rasa "glass" untuk light mode */
+    @media (prefers-color-scheme: light){
+      .card{ border-color: rgba(15,23,42,.06); box-shadow: 0 10px 40px rgba(2,6,23,.08) }
+      .button{ border-color: rgba(2,6,23,.10) }
+      .badge{ border-color: rgba(2,6,23,.15) }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <section class="card" role="status" aria-live="polite">
+      <div class="brand">
+        <span class="dot" aria-hidden="true"></span>
+        <strong><!-- GANTI: Nama Anda -->Nama Anda</strong>
+        <span style="opacity:.6">• Portofolio</span>
+      </div>
+
+      <div class="illustration" aria-hidden="true">
+        <!-- Gigi besar -->
+        <svg class="gear spin" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+          <circle cx="50" cy="50" r="26" stroke="currentColor" stroke-width="8" opacity=".25" />
+          <circle cx="50" cy="50" r="12" fill="currentColor" opacity=".25" />
+          <g fill="currentColor" opacity=".85">
+            <rect x="48" y="4"  width="4" height="16" rx="2" transform="rotate(0 50 50)"/>
+            <rect x="48" y="4"  width="4" height="16" rx="2" transform="rotate(45 50 50)"/>
+            <rect x="48" y="4"  width="4" height="16" rx="2" transform="rotate(90 50 50)"/>
+            <rect x="48" y="4"  width="4" height="16" rx="2" transform="rotate(135 50 50)"/>
+            <rect x="48" y="4"  width="4" height="16" rx="2" transform="rotate(180 50 50)"/>
+            <rect x="48" y="4"  width="4" height="16" rx="2" transform="rotate(225 50 50)"/>
+            <rect x="48" y="4"  width="4" height="16" rx="2" transform="rotate(270 50 50)"/>
+            <rect x="48" y="4"  width="4" height="16" rx="2" transform="rotate(315 50 50)"/>
+          </g>
+        </svg>
+        <!-- Gigi kecil -->
+        <svg class="gear small spin-rev" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+          <circle cx="50" cy="50" r="18" stroke="currentColor" stroke-width="7" opacity=".25" />
+          <g fill="currentColor" opacity=".85">
+            <rect x="48" y="6"  width="4" height="12" rx="2" transform="rotate(0 50 50)"/>
+            <rect x="48" y="6"  width="4" height="12" rx="2" transform="rotate(60 50 50)"/>
+            <rect x="48" y="6"  width="4" height="12" rx="2" transform="rotate(120 50 50)"/>
+            <rect x="48" y="6"  width="4" height="12" rx="2" transform="rotate(180 50 50)"/>
+            <rect x="48" y="6"  width="4" height="12" rx="2" transform="rotate(240 50 50)"/>
+            <rect x="48" y="6"  width="4" height="12" rx="2" transform="rotate(300 50 50)"/>
+          </g>
+        </svg>
+      </div>
+
+      <h1>Situs Dalam Perawatan</h1>
+      <p class="lead">Portofolio <strong><!-- GANTI: Nama Anda -->Nama Anda</strong> sedang di-upgrade. Kami memperbaiki bug, merapikan UI, dan meningkatkan performa. Terima kasih atas kesabarannya 🙏</p>
+
+      <div class="status" aria-label="Status perbaikan saat ini">
+        <span class="badge">🔧 Refactor &amp; optimasi</span>
+        <span class="badge">🎨 Penyegaran UI</span>
+        <span class="badge">🛡️ Pengerasan keamanan</span>
+      </div>
+
+      <div class="progress" aria-hidden="true"><span></span></div>
+      <small class="muted" style="color:var(--muted)">Perkiraan selesai: <em>segera</em></small>
+
+      <div class="actions">
+        <a class="button primary" href="mailto:email@domain.com?subject=Min%20update%20saat%20online" aria-label="Kirim email">
+          <!-- mail icon -->
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1zm0 0 8 6 8-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Hubungi Saya
+        </a>
+        <a class="button" href="#" target="_blank" rel="noopener" aria-label="Lihat LinkedIn"> 
+          <!-- link icon -->
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M10 13a5 5 0 1 1 9 3.54V21h-3v-4.46a2 2 0 0 0-4 0V21H9v-8h3v2zM4 9h3v12H4z" stroke="currentColor" stroke-width="0" fill="currentColor"/></svg>
+          LinkedIn
+        </a>
+        <a class="button" href="#" target="_blank" rel="noopener" aria-label="Lihat GitHub">
+          <!-- github icon -->
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.2-3.37-1.2a2.65 2.65 0 0 0-1.1-1.46c-.9-.62.07-.61.07-.61a2.1 2.1 0 0 1 1.53 1.03 2.14 2.14 0 0 0 2.92.83 2.14 2.14 0 0 1 .63-1.34c-2.22-.25-4.56-1.11-4.56-4.94A3.86 3.86 0 0 1 6.8 7.6a3.6 3.6 0 0 1 .1-2.65s.84-.27 2.75 1.03a9.5 9.5 0 0 1 5 0c1.9-1.3 2.74-1.03 2.74-1.03.37.84.41 1.8.1 2.65a3.86 3.86 0 0 1 1.03 2.67c0 3.85-2.34 4.69-4.56 4.94a2.4 2.4 0 0 1 .69 1.84v2.73c0 .27.18.58.69.48A10 10 0 0 0 12 2z" fill="currentColor"/></svg>
+          GitHub
+        </a>
+      </div>
+
+      <div class="footer">
+        <div class="contact">
+          <span class="pill">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92V21a1 1 0 0 1-1.22 1 19.72 19.72 0 0 1-8.58-3.07A19.5 19.5 0 0 1 3.07 11.8 19.72 19.72 0 0 1 0 3.22 1 1 0 0 1 1 2h4.09a1 1 0 0 1 1 .75c.12.46.26.91.43 1.35a1 1 0 0 1-.23 1L5 6a16 16 0 0 0 7 7l.9-1.29a1 1 0 0 1 1-.23c.44.17.89.31 1.35.43a1 1 0 0 1 .75 1V20a1 1 0 0 1-1 1h-.08" fill="currentColor"/></svg>
+            +62 812‑3456‑7890
+          </span>
+          <span class="pill">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm0 0 8 7 8-7" fill="currentColor"/></svg>
+            email@domain.com
+          </span>
+        </div>
+        <span>© 2025 • Portofolio <!-- GANTI: Nama Anda --></span>
+      </div>
+    </section>
+  </main>
+
+  <!-- Tips cepat kustomisasi: 
+    1) Ganti "Nama Anda" dan kontak (email/telepon) di atas. 
+    2) Ubah warna brand di :root { --brand: ...; --accent: ... }.
+    3) Tautkan tombol LinkedIn/GitHub ke profil Anda. 
+    4) Opsional: ganti teks status/emoji sesuai kebutuhan.
+  -->
+</body>
+</html>
