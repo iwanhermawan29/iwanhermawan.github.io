@@ -1,183 +1,469 @@
-<html>
+<!doctype html>
 <html lang="id">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="robots" content="noindex,nofollow" />
+  <meta name="robots" content="index,follow" />
+  <title>Portofolio — Nama Anda</title>
+  <meta name="description" content="Landing page portofolio: tentang saya, karya, sertifikat, dan kontak." />
   <meta name="theme-color" content="#0b1220" />
-  <title>Portofolio — Sedang Perawatan</title>
-  <meta name="description" content="Portofolio sedang dalam perawatan. Kami sedang menyiapkan sesuatu yang lebih cepat, rapi, dan aman." />
-  <meta property="og:title" content="Portofolio — Sedang Perawatan" />
-  <meta property="og:description" content="Situs akan segera kembali lebih baik dari sebelumnya." />
-  <meta property="og:type" content="website" />
   <style>
+    /* =====================
+       THEME & RESET
+       ===================== */
     :root{
-      --brand: #16a34a;   /* ganti warna brand utama di sini */
-      --accent:#22c55e;   /* aksen animasi */
-      --bg:#0b1220;
-      --fg:#e5e7eb;
-      --muted:#9ca3af;
-      --card:#111827;
+      --bg:#0b1220;        /* ubah warna tema utama di sini */
+      --surface:#0f172a;   /* kartu/nav */
+      --brand:#22c55e;     /* aksen utama */
+      --brand-2:#16a34a;   /* aksen sekunder */
+      --text:#e5e7eb;      /* teks utama */
+      --muted:#9ca3af;     /* teks sekunder */
+      --line:rgba(255,255,255,.12);
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+      --radius:18px;
     }
     @media (prefers-color-scheme: light){
-      :root{
-        --bg:#f8fafc; --fg:#0f172a; --muted:#334155; --card:#ffffff;
-      }
+      :root{ --bg:#f8fafc; --surface:#ffffff; --text:#0f172a; --muted:#475569; --line:rgba(15,23,42,.12); --shadow:0 10px 30px rgba(2,6,23,.06) }
     }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Ubuntu, "Helvetica Neue", Arial, sans-serif;
-      color:var(--fg);
-      background:
-        radial-gradient(60% 60% at 50% 40%, rgba(34,197,94,.14), transparent 55%),
-        linear-gradient(120deg, var(--bg), var(--bg) 40%, #0f172a 100%);
-      display:flex; align-items:center; justify-content:center; padding:24px;
-    }
-    .container{ width:min(960px, 100%); }
+    *,*::before,*::after{ box-sizing:border-box }
+    html,body{ height:100% }
+    body{ margin:0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif; background:var(--bg); color:var(--text); line-height:1.55 }
+    img{ max-width:100%; height:auto; display:block }
+    a{ color:inherit; text-decoration:none }
+    .container{ width:min(1100px, 90%); margin:0 auto }
+    .section{ padding:80px 0 }
+    .pill{ display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border:1px solid var(--line); border-radius:999px; font-size:12px; color:var(--muted) }
+    .btn{ display:inline-flex; align-items:center; gap:10px; padding:12px 16px; border-radius:14px; border:1px solid var(--line); background:transparent; color:var(--text) }
+    .btn.primary{ background:linear-gradient(90deg, var(--brand), var(--brand-2)); border-color:transparent; color:white }
+    .btn:hover{ transform: translateY(-1px); filter: brightness(1.05) }
+    .card{ background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow) }
+    .subtle{ color:var(--muted) }
 
-    .card{
-      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
-      border:1px solid rgba(255,255,255,.08);
-      border-radius: 24px;
-      backdrop-filter: blur(8px);
-      padding: 32px;
-      box-shadow: 0 10px 30px rgba(0,0,0,.25);
-    }
+    /* =====================
+       NAVBAR
+       ===================== */
+    .nav{ position:sticky; top:0; z-index:50; backdrop-filter:blur(10px); background:linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,.15)); border-bottom:1px solid var(--line) }
+    @media (prefers-color-scheme: light){ .nav{ background:rgba(255,255,255,.7) } }
+    .nav-inner{ display:flex; align-items:center; justify-content:space-between; height:70px }
+    .brand{ display:flex; align-items:center; gap:10px; font-weight:700 }
+    .brand .logo{ width:12px; height:12px; border-radius:50%; background:var(--brand); box-shadow:0 0 14px var(--brand) }
+    .nav ul{ display:flex; gap:18px; list-style:none; margin:0; padding:0 }
+    .nav a{ padding:10px 12px; border-radius:10px; color:var(--muted) }
+    .nav a:hover{ background:rgba(255,255,255,.06); color:var(--text) }
 
-    .brand{ display:flex; align-items:center; gap:10px; margin-bottom:12px }
-    .brand .dot{ width:10px; height:10px; background:var(--accent); border-radius:50%; box-shadow: 0 0 12px var(--accent) }
-    .brand strong{ font-weight:700 }
+   /* === Enhancements: portfolio hover & lightbox === */
+.work .item{ position:relative; overflow:hidden; border-radius:var(--radius);
+  transition: transform .25s ease, box-shadow .25s ease }
+.work .item:hover{ transform: translateY(-4px); box-shadow: 0 14px 40px rgba(0,0,0,.35) }
 
-    h1{ font-size:clamp(28px,5vw,44px); margin:0 0 8px 0; letter-spacing:.2px }
-    p.lead{ font-size:clamp(14px,2.4vw,18px); color:var(--muted); margin:0 0 20px 0 }
+.work .thumb{ position:relative; aspect-ratio:16/10; overflow:hidden; display:block }
+.work .thumb img{ width:100%; height:100%; object-fit:cover;
+  transform: scale(1.02); transition: transform .6s ease }
+.work .item:hover .thumb img{ transform: scale(1.08) }
 
-    .illustration{ position:relative; height:170px; display:grid; place-items:center; margin-bottom:8px }
-    .gear{ width:72px; height:72px; color:var(--accent) }
-    .small{ width:42px; height:42px; position:absolute; right:16%; top:40%; opacity:.9 }
+/* “sapu” kilau */
+.work .thumb.shine::after{
+  content:""; position:absolute; inset:-30%;
+  transform: skewX(-20deg) translateX(-120%);
+  background: linear-gradient(90deg, rgba(255,255,255,0) 0%,
+    rgba(255,255,255,.35) 50%, rgba(255,255,255,0) 100%);
+  transition: transform .8s ease;
+}
+.work .item:hover .thumb.shine::after{
+  transform: skewX(-20deg) translateX(120%);
+}
 
-    @keyframes spin { to { transform: rotate(360deg) } }
-    .spin{ animation: spin 12s linear infinite }
-    .spin-rev{ animation: spin 9s linear infinite reverse }
+/* overlay info saat hover */
+.work .overlay{ position:absolute; inset:0; display:flex; align-items:flex-end;
+  padding:14px; background: linear-gradient(180deg, rgba(0,0,0,0) 45%, rgba(0,0,0,.55));
+  opacity:0; transition: opacity .3s ease }
+.work .item:hover .overlay{ opacity:1 }
+.work .overlay .title{ color:#fff; font-weight:700 }
+.work .overlay .stack{ color:#f1f5f9; opacity:.95; font-size:13px }
 
-    .status{ display:flex; flex-wrap:wrap; gap:8px; margin:16px 0 24px }
-    .badge{ padding:6px 10px; border:1px dashed rgba(255,255,255,.22); border-radius:999px; font-size:12px; color:var(--muted) }
+/* Lightbox */
+.lb{ position:fixed; inset:0; background:rgba(0,0,0,.75);
+  display:none; align-items:center; justify-content:center; padding:24px; z-index:100 }
+.lb.show{ display:flex }
+.lb img{ max-width:90vw; max-height:80vh; border-radius:14px; box-shadow:var(--shadow) }
+.lb-cap{ color:#fff; margin-top:12px; text-align:center; font-size:14px; opacity:.9 }
+.lb-close{ position:absolute; top:16px; right:16px; width:40px; height:40px; border-radius:10px;
+  border:1px solid rgba(255,255,255,.35); background:rgba(0,0,0,.35); color:#fff;
+  font-size:24px; line-height:1; cursor:pointer }
 
-    .progress{ height:8px; background:rgba(255,255,255,.08); border-radius:999px; overflow:hidden; margin: 10px 0 2px }
-    .progress > span{ display:block; height:100%; background: linear-gradient(90deg, var(--accent), #7dd3fc); width:45%; animation: load 2.5s ease-in-out infinite }
-    @keyframes load{ 0%{ width:15% } 50%{ width:65% } 100%{ width:15% } }
 
-    .actions{ display:flex; flex-wrap:wrap; gap:12px; margin-top:10px }
-    .button{ display:inline-flex; align-items:center; gap:10px; padding:10px 14px; border-radius:12px; border:1px solid rgba(255,255,255,.12); text-decoration:none; color:var(--fg) }
-    .button.primary{ background:var(--brand); border-color:transparent; color:white }
-    .button:hover{ transform: translateY(-1px) }
+    /* =====================
+       HERO
+       ===================== */
+    .hero{ padding:90px 0 60px; display:grid; grid-template-columns:1.05fr .95fr; gap:36px; align-items:center }
+    .hero h1{ font-size:clamp(28px,5vw,48px); margin:0 0 10px 0 }
+    .hero p{ font-size:clamp(14px,2.2vw,18px); color:var(--muted) }
+    .hero .actions{ margin-top:22px; display:flex; flex-wrap:wrap; gap:12px }
+    .hero-visual{ position:relative; aspect-ratio:1/1; min-height:320px }
+    .blob{ position:absolute; inset:0; border:1px solid var(--line); border-radius:28px; overflow:hidden; box-shadow:var(--shadow); animation: floaty 8s ease-in-out infinite;
+/* Ganti URL di inline style --avatar pada HTML */
+background:
+radial-gradient(40% 35% at 35% 35%, rgba(34,197,94,.30), transparent 60%),
+radial-gradient(40% 35% at 70% 65%, rgba(59,130,246,.30), transparent 60%),
+linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02)),
+var(--avatar) center/cover no-repeat; /* layer paling bawah adalah foto */
+}
+    .avatar{ position:absolute; right:10%; bottom:-12%; width:min(240px,48%); border-radius:22px; overflow:hidden; border:1px solid var(--line) }
+    .avatar .ph{ display:grid; place-items:center; background:linear-gradient(135deg, rgba(34,197,94,.15), rgba(59,130,246,.15)); aspect-ratio:1/1 }
+    @keyframes floaty{ 0%,100%{ transform: translateY(0) rotate(2deg) } 50%{ transform: translateY(-8px) rotate(0deg) } }
 
-    .footer{ margin-top:24px; font-size:12px; color:var(--muted); display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap }
+    /* =====================
+       GRID & LAYOUTS
+       ===================== */
+    .grid{ display:grid; gap:18px }
+    .grid-3{ grid-template-columns: repeat(3,1fr) }
+    .grid-2{ grid-template-columns: repeat(2,1fr) }
+    @media (max-width: 980px){ .hero{ grid-template-columns:1fr; } .avatar{ position:relative; right:auto; bottom:auto; width:60%; margin: -30% auto 0 } }
+    @media (max-width: 720px){ .grid-3{ grid-template-columns: 1fr } .grid-2{ grid-template-columns: 1fr } .section{ padding:64px 0 } }
 
-    /* Kartu kontak kecil */
-    .contact{ display:flex; gap:14px; flex-wrap:wrap; align-items:center }
-    .pill{ display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border-radius:999px; border:1px solid rgba(255,255,255,.12); font-size:12px; color:var(--muted) }
-    .pill svg{ width:14px; height:14px; opacity:.8 }
+    /* =====================
+       SECTION: ABOUT
+       ===================== */
+    .about{ display:grid; grid-template-columns: 1.2fr .8fr; gap:24px }
+    .about .card{ padding:22px }
+    .about ul{ margin:10px 0 0 18px }
+    @media (max-width: 960px){ .about{ grid-template-columns:1fr } }
 
-    /* Sedikit rasa "glass" untuk light mode */
-    @media (prefers-color-scheme: light){
-      .card{ border-color: rgba(15,23,42,.06); box-shadow: 0 10px 40px rgba(2,6,23,.08) }
-      .button{ border-color: rgba(2,6,23,.10) }
-      .badge{ border-color: rgba(2,6,23,.15) }
-    }
+    /* =====================
+       SECTION: PORTFOLIO
+       ===================== */
+    .work .item{ overflow:hidden; position:relative }
+    .work .thumb{ aspect-ratio: 16/10; background: linear-gradient(135deg, rgba(34,197,94,.15), rgba(59,130,246,.15)); display:grid; place-items:center }
+    .work .thumb span{ font-size:13px; color:var(--muted) }
+    .work .meta{ padding:14px 16px; display:flex; justify-content:space-between; align-items:center; gap:12px }
+    .chip{ font-size:12px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,.06); border:1px solid var(--line) }
+    .item:hover .thumb{ filter: brightness(1.05) }
+
+    /* =====================
+       SECTION: CERTIFICATES
+       ===================== */
+    .cert .item{ display:flex; gap:16px; padding:16px; align-items:center }
+    .cert .icon{ width:44px; height:44px; border-radius:12px; display:grid; place-items:center; background:linear-gradient(135deg, rgba(34,197,94,.18), rgba(59,130,246,.18)); border:1px solid var(--line) }
+    .cert .title{ font-weight:600 }
+    .cert .org{ color:var(--muted); font-size:14px }
+
+    /* =====================
+       SECTION: CONTACT
+       ===================== */
+    form{ display:grid; gap:12px }
+    input,textarea{ width:100%; background:transparent; color:var(--text); padding:12px 14px; border-radius:12px; border:1px solid var(--line); outline:none }
+    textarea{ min-height:140px; resize:vertical }
+    .contact-cards{ display:grid; gap:14px; grid-template-columns: 1fr 1fr }
+    .contact-cards .cc{ padding:16px; display:flex; gap:12px; align-items:center }
+    @media (max-width: 720px){ .contact-cards{ grid-template-columns:1fr } }
+
+    /* =====================
+       MISC
+       ===================== */
+    .section-title{ display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:18px }
+    .section-title h2{ margin:0; font-size:clamp(20px,3.2vw,28px) }
+    .sep{ height:1px; background:var(--line) }
+    .footer{ padding:28px 0; color:var(--muted); font-size:13px }
+    .badgebar{ display:flex; gap:8px; flex-wrap:wrap }
+    .badge{ padding:6px 10px; border:1px dashed var(--line); border-radius:999px; font-size:12px; color:var(--muted) }
+
+    /* Back to top */
+    .to-top{ position:fixed; right:18px; bottom:18px; width:44px; height:44px; border-radius:12px; display:grid; place-items:center; background:var(--surface); border:1px solid var(--line); box-shadow:var(--shadow); opacity:0; transform: translateY(8px); transition:.25s }
+    .to-top.show{ opacity:1; transform: translateY(0) }
   </style>
 </head>
 <body>
-  <main class="container">
-    <section class="card" role="status" aria-live="polite">
-      <div class="brand">
-        <span class="dot" aria-hidden="true"></span>
-        <strong><!-- GANTI: Nama Anda -->Nama Anda</strong>
-        <span style="opacity:.6">• Portofolio</span>
-      </div>
+  <!-- NAV -->
+  <header class="nav">
+    <div class="container nav-inner">
+      <div class="brand"><span class="logo" aria-hidden="true"></span> <a href="#home">IWAN HERMAWAN</a></div>
+      <nav aria-label="Navigasi utama">
+        <ul>
+          <li><a href="#about">Tentang</a></li>
+          <li><a href="#work">Portofolio</a></li>
+          <li><a href="#cert">Sertifikat</a></li>
+          <li><a href="#contact">Kontak</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-      <div class="illustration" aria-hidden="true">
-        <!-- Gigi besar -->
-        <svg class="gear spin" viewBox="0 0 100 100" fill="none" aria-hidden="true">
-          <circle cx="50" cy="50" r="26" stroke="currentColor" stroke-width="8" opacity=".25" />
-          <circle cx="50" cy="50" r="12" fill="currentColor" opacity=".25" />
-          <g fill="currentColor" opacity=".85">
-            <rect x="48" y="4"  width="4" height="16" rx="2" transform="rotate(0 50 50)"/>
-            <rect x="48" y="4"  width="4" height="16" rx="2" transform="rotate(45 50 50)"/>
-            <rect x="48" y="4"  width="4" height="16" rx="2" transform="rotate(90 50 50)"/>
-            <rect x="48" y="4"  width="4" height="16" rx="2" transform="rotate(135 50 50)"/>
-            <rect x="48" y="4"  width="4" height="16" rx="2" transform="rotate(180 50 50)"/>
-            <rect x="48" y="4"  width="4" height="16" rx="2" transform="rotate(225 50 50)"/>
-            <rect x="48" y="4"  width="4" height="16" rx="2" transform="rotate(270 50 50)"/>
-            <rect x="48" y="4"  width="4" height="16" rx="2" transform="rotate(315 50 50)"/>
-          </g>
-        </svg>
-        <!-- Gigi kecil -->
-        <svg class="gear small spin-rev" viewBox="0 0 100 100" fill="none" aria-hidden="true">
-          <circle cx="50" cy="50" r="18" stroke="currentColor" stroke-width="7" opacity=".25" />
-          <g fill="currentColor" opacity=".85">
-            <rect x="48" y="6"  width="4" height="12" rx="2" transform="rotate(0 50 50)"/>
-            <rect x="48" y="6"  width="4" height="12" rx="2" transform="rotate(60 50 50)"/>
-            <rect x="48" y="6"  width="4" height="12" rx="2" transform="rotate(120 50 50)"/>
-            <rect x="48" y="6"  width="4" height="12" rx="2" transform="rotate(180 50 50)"/>
-            <rect x="48" y="6"  width="4" height="12" rx="2" transform="rotate(240 50 50)"/>
-            <rect x="48" y="6"  width="4" height="12" rx="2" transform="rotate(300 50 50)"/>
-          </g>
-        </svg>
-      </div>
-
-      <h1>Situs Dalam Perawatan</h1>
-      <p class="lead">Portofolio <strong><!-- GANTI: Nama Anda -->Nama Anda</strong> sedang di-upgrade. Kami memperbaiki bug, merapikan UI, dan meningkatkan performa. Terima kasih atas kesabarannya 🙏</p>
-
-      <div class="status" aria-label="Status perbaikan saat ini">
-        <span class="badge">🔧 Refactor &amp; optimasi</span>
-        <span class="badge">🎨 Penyegaran UI</span>
-        <span class="badge">🛡️ Pengerasan keamanan</span>
-      </div>
-
-      <div class="progress" aria-hidden="true"><span></span></div>
-      <small class="muted" style="color:var(--muted)">Perkiraan selesai: <em>segera</em></small>
-
+  <!-- HERO -->
+  <section id="home" class="container hero">
+    <div>
+      <span class="pill" aria-label="Status ketersediaan">🟢 Tersedia untuk proyek freelance</span>
+      <h1>Halo, saya <span style="color:var(--brand)"><!-- GANTI: Nama Anda -->Iwan Hermawan</span> — Full‑Stack Developer yang suka membangun aplikasi cepat, rapi, dan terukur.</h1>
+      <p>Saya berpengalaman pada <strong>Laravel</strong>, <strong>Vue 3</strong>, <strong>Docker</strong>, dan <strong>MySQL/PostgreSQL</strong>. Fokus saya: UX yang mulus, performa yang kencang, dan arsitektur yang bersih.</p>
       <div class="actions">
-        <a class="button primary" href="mailto:email@domain.com?subject=Min%20update%20saat%20online" aria-label="Kirim email">
-          <!-- mail icon -->
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1zm0 0 8 6 8-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          Hubungi Saya
+        <a class="btn primary" href="#contact" aria-label="Hubungi saya">
+          <!-- icon mail -->
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1zm0 0 8 6 8-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Ayo Kolaborasi
         </a>
-        <a class="button" href="#" target="_blank" rel="noopener" aria-label="Lihat LinkedIn"> 
-          <!-- link icon -->
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M10 13a5 5 0 1 1 9 3.54V21h-3v-4.46a2 2 0 0 0-4 0V21H9v-8h3v2zM4 9h3v12H4z" stroke="currentColor" stroke-width="0" fill="currentColor"/></svg>
-          LinkedIn
-        </a>
-        <a class="button" href="#" target="_blank" rel="noopener" aria-label="Lihat GitHub">
-          <!-- github icon -->
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.2-3.37-1.2a2.65 2.65 0 0 0-1.1-1.46c-.9-.62.07-.61.07-.61a2.1 2.1 0 0 1 1.53 1.03 2.14 2.14 0 0 0 2.92.83 2.14 2.14 0 0 1 .63-1.34c-2.22-.25-4.56-1.11-4.56-4.94A3.86 3.86 0 0 1 6.8 7.6a3.6 3.6 0 0 1 .1-2.65s.84-.27 2.75 1.03a9.5 9.5 0 0 1 5 0c1.9-1.3 2.74-1.03 2.74-1.03.37.84.41 1.8.1 2.65a3.86 3.86 0 0 1 1.03 2.67c0 3.85-2.34 4.69-4.56 4.94a2.4 2.4 0 0 1 .69 1.84v2.73c0 .27.18.58.69.48A10 10 0 0 0 12 2z" fill="currentColor"/></svg>
-          GitHub
-        </a>
+        <a class="btn" href="#work" aria-label="Lihat portofolio">Lihat Karya</a>
+        <a class="btn" href="#" download aria-label="Unduh CV">Unduh CV</a>
       </div>
+      <div class="badgebar" style="margin-top:14px">
+        <span class="badge">Laravel</span>
+        <span class="badge">Vue 3</span>
+        <span class="badge">TypeScript</span>
+        <span class="badge">Docker</span>
+        <span class="badge">MySQL • PostgreSQL</span>
+        <span class="badge">REST API</span>
+      </div>
+    </div>
+    <div class="hero-visual">
+        <!-- Ganti URL avatar di style --avatar berikut -->
+        <div class="blob card" style="--avatar: url('img/iwan.jpeg');"></div>
+    </div>
+      
+  </section>
 
-      <div class="footer">
-        <div class="contact">
-          <span class="pill">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92V21a1 1 0 0 1-1.22 1 19.72 19.72 0 0 1-8.58-3.07A19.5 19.5 0 0 1 3.07 11.8 19.72 19.72 0 0 1 0 3.22 1 1 0 0 1 1 2h4.09a1 1 0 0 1 1 .75c.12.46.26.91.43 1.35a1 1 0 0 1-.23 1L5 6a16 16 0 0 0 7 7l.9-1.29a1 1 0 0 1 1-.23c.44.17.89.31 1.35.43a1 1 0 0 1 .75 1V20a1 1 0 0 1-1 1h-.08" fill="currentColor"/></svg>
-            +62 812‑3456‑7890
-          </span>
-          <span class="pill">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm0 0 8 7 8-7" fill="currentColor"/></svg>
-            email@domain.com
-          </span>
+  <!-- ABOUT -->
+  <section id="about" class="section">
+    <div class="container about">
+        <article class="card">
+            <div class="section-title">
+              <h2>Tentang Saya</h2>
+              <div class="sep" style="flex:1"></div>
+            </div>
+            <p>
+                Saya adalah seorang <strong>Full Stack Developer</strong> dengan lebih dari 
+                <strong>5 tahun pengalaman</strong> dalam membangun aplikasi web skala UKM hingga enterprise. 
+                Berfokus pada pengembangan <em>end-to-end</em>, mulai dari backend yang tangguh, 
+                frontend yang responsif, hingga DevOps yang dapat diandalkan.
+              </p>
+              <p>
+                Passion saya adalah memetakan masalah bisnis menjadi solusi teknis yang 
+                <strong>efisien, elegan, dan skalabel</strong>. 
+                Terbiasa dengan arsitektur modular, optimasi query database, 
+                serta penerapan caching untuk meningkatkan performa sistem.
+              </p>
+              <p>
+                Selain sisi teknis, saya dikenal <strong>komunikatif, kolaboratif, dan fokus pada hasil</strong>. 
+                Saya percaya kolaborasi yang baik dan komunikasi yang jelas akan menghasilkan produk 
+                yang bukan hanya berjalan, tapi juga memberi nilai nyata bagi bisnis.
+              </p>
+            <ul>
+              <li>5+ tahun pengalaman membangun aplikasi web skala UKM–enterprise.</li>
+              <li>Terbiasa dengan arsitektur modular, caching, dan optimasi query.</li>
+              <li>Komunikatif, kolaboratif, dan fokus pada hasil.</li>
+              <li>Berpengalaman dengan PHP (Laravel, CI), Vue.js, React, MySQL/PostgreSQL, serta Docker & CI/CD.</li>
+            </ul>
+          </article>
+          
+      <aside class="card" style="padding:22px">
+        <div class="section-title"><h2>Keahlian Inti</h2><div class="sep" style="flex:1"></div></div>
+        <div class="grid grid-2">
+          <div>
+            <h4>Backend</h4>
+            <p class="subtle">Laravel, Codeigniter, Python, PHP Native,  Node.js , REST, Auth, Queue, Test</p>
+          </div>
+          <div>
+            <h4>Frontend</h4>
+            <p class="subtle">Vue 3 + Vite, Composition API, Tailwind (opsional), Charting, HTML, CSS, Flutter</p>
+          </div>
+          <div>
+            <h4>Database</h4>
+            <p class="subtle">MySQL, MariaDB, PostgreSQL, Optimasi Query, Replication, SQL Server, Store Procedure</p>
+          </div>
+          <div>
+            <h4>Analisis Data</h4>
+            <p class="subtle">Tableau Online , Tableau, Talend, Transform Data</p>
+          </div>
         </div>
-        <span>© 2025 • Portofolio <!-- GANTI: Nama Anda --></span>
-      </div>
-    </section>
-  </main>
+      </aside>
+    </div>
+  </section>
 
-  <!-- Tips cepat kustomisasi: 
-    1) Ganti "Nama Anda" dan kontak (email/telepon) di atas. 
-    2) Ubah warna brand di :root { --brand: ...; --accent: ... }.
-    3) Tautkan tombol LinkedIn/GitHub ke profil Anda. 
-    4) Opsional: ganti teks status/emoji sesuai kebutuhan.
-  -->
+  <section id="work" class="section work"><div class="container"><div class="section-title"><h2>Portofolio</h2><div class="sep"></div></div><div class="grid grid-3">
+    <article class="card item"><div class="thumb"><img src="images/proyek1.jpg" alt="HRMS"><div class="overlay"><div><h3>HRMS</h3><p>PHP Native • HTML • SQL Server</p></div></div></div></article>
+    <article class="card item"><div class="thumb"><img src="images/proyek2.jpg" alt="Sunfish ERP"><div class="overlay"><div><h3>ERP PT Polychem Indonesia TBK</h3><p>Coldfusion • HTML • SQL Server</p></div></div></div></article>
+    <article class="card item"><div class="thumb"><img src="images/proyek3.jpg" alt="BON PRF"><div class="overlay"><div><h3>Bon PRF PT Polychem Indonesia TBK</h3><p>PHP • Bootstrap • MYSQL</p></div></div></div></article>
+    <article class="card item"><div class="thumb"><img src="images/proyek1.jpg" alt="Tableau"><div class="overlay"><div><h3>Dashboard Monitoring</h3><p>Tableau • Talend • SQL Server</p></div></div></div></article>
+    <article class="card item"><div class="thumb"><img src="images/proyek2.jpg" alt="ERP SYOP"><div class="overlay"><div><h3>Dashboard Monitoring</h3><p>Prometheus • Grafana</p></div></div></div></article>
+    <article class="card item"><div class="thumb"><img src="images/proyek3.jpg" alt="ERP Stone"><div class="overlay"><div><h3>Crushed Stone ERP</h3><p>Laravel • Vue 3 • Postgres</p></div></div></div></article>
+    <article class="card item"><div class="thumb"><img src="images/proyek1.jpg" alt="Website Pinna"><div class="overlay"><div><h3>ERP Logistic Fuel</h3><p>Laravel • Vue • MySQL</p></div></div></div></article>
+    <article class="card item"><div class="thumb"><img src="images/proyek2.jpg" alt="Website tridayaselaras"><div class="overlay"><div><h3>Dashboard Monitoring</h3><p>Prometheus • Grafana</p></div></div></div></article>
+    <article class="card item"><div class="thumb"><img src="images/proyek3.jpg" alt="Qrcode Pinna"><div class="overlay"><div><h3>Crushed Stone ERP</h3><p>Laravel • Vue 3 • Postgres</p></div></div></div></article>
+    </div></div></section>
+
+  <!-- CERTIFICATES -->
+  <section id="cert" class="section">
+    <div class="container">
+      <div class="section-title"><h2>Sertifikat</h2><div class="sep" style="flex:1"></div></div>
+      <div class="card">
+        <div class="grid grid-3 cert" style="padding:12px">
+          <div class="item">
+            <div class="icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2l3 6 6 .9-4.5 4.3 1 6.5L12 17l-5.5 2.7 1-6.5L3 8.9 9 8z" fill="currentColor" opacity=".9"/></svg>
+            </div>
+            <div>
+              <div class="title">Laravel Certification</div>
+              <div class="org">Vendor/Institusi • 2024</div>
+            </div>
+          </div>
+          <div class="item">
+            <div class="icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2l3 6 6 .9-4.5 4.3 1 6.5L12 17l-5.5 2.7 1-6.5L3 8.9 9 8z" fill="currentColor" opacity=".9"/></svg>
+            </div>
+            <div>
+              <div class="title">Devops</div>
+              <div class="org">IDN Network • 2024</div>
+            </div>
+          </div>
+          <div class="item">
+            <div class="icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2l3 6 6 .9-4.5 4.3 1 6.5L12 17l-5.5 2.7 1-6.5L3 8.9 9 8z" fill="currentColor" opacity=".9"/></svg>
+            </div>
+            <div>
+              <div class="title">SQL for Data • Advanced</div>
+              <div class="org">Vendor/Institusi • 2022</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section">
+    <div class="container">
+      <div class="section-title"><h2>Kontak</h2><div class="sep" style="flex:1"></div></div>
+      <div class="grid grid-2">
+        <div class="card" style="padding:18px">
+          <form onsubmit="return submitForm(event)">
+            <label>Nama
+              <input name="name" required placeholder="Nama lengkap" />
+            </label>
+            <label>Email
+              <input name="email" type="email" required placeholder="nama@email.com" />
+            </label>
+            <label>Pesan
+              <textarea name="message" required placeholder="Tulis pesanmu di sini..."></textarea>
+            </label>
+            <button class="btn primary" type="submit">Kirim Pesan</button>
+            <p class="subtle" id="form-note" role="status" style="margin:10px 0 0"></p>
+          </form>
+        </div>
+        <div class="card contact-cards">
+          <div class="cc">
+            <div class="icon" style="width:44px; height:44px; border-radius:12px; display:grid; place-items:center; background:linear-gradient(135deg, rgba(34,197,94,.18), rgba(59,130,246,.18)); border:1px solid var(--line)">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M22 16.9V21a1 1 0 0 1-1.2 1 19.7 19.7 0 0 1-8.6-3.1A19.5 19.5 0 0 1 3.1 11.8 19.7 19.7 0 0 1 0 3.2 1 1 0 0 1 1 2h4.1a1 1 0 0 1 1 .8c.1.5.3.9.4 1.3a1 1 0 0 1-.2 1L5 6a16 16 0 0 0 7 7l.9-1.3a1 1 0 0 1 1-.2c.4.2.9.3 1.3.4a1 1 0 0 1 .8 1V20a1 1 0 0 1-1 1h-.1" fill="currentColor"/></svg>
+            </div>
+            <div>
+              <div><strong>WhatsApp</strong></div>
+              <div class="subtle">+62 857‑7173‑7414</div>
+            </div>
+          </div>
+          <div class="cc">
+            <div class="icon" style="width:44px; height:44px; border-radius:12px; display:grid; place-items:center; background:linear-gradient(135deg, rgba(34,197,94,.18), rgba(59,130,246,.18)); border:1px solid var(--line)">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm0 0 8 7 8-7" fill="currentColor"/></svg>
+            </div>
+            <div>
+              <div><strong>Email</strong></div>
+              <div class="subtle">ihermawan227@gmail.com</div>
+            </div>
+          </div>
+          <div class="cc">
+            <div class="icon" style="width:44px; height:44px; border-radius:12px; display:grid; place-items:center; background:linear-gradient(135deg, rgba(34,197,94,.18), rgba(59,130,246,.18)); border:1px solid var(--line)">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M10 13a5 5 0 1 1 9 3.5V21h-3v-4.5a2 2 0 0 0-4 0V21H9v-8h3v2zM4 9h3v12H4z" fill="currentColor"/></svg>
+            </div>
+            <div>
+              <div><strong>LinkedIn</strong></div>
+              <div class="subtle"><a href="#" target="_blank" rel="noopener">linkedin.com/in/iwanhermawan</a></div>
+            </div>
+          </div>
+          <div class="cc">
+            <div class="icon" style="width:44px; height:44px; border-radius:12px; display:grid; place-items:center; background:linear-gradient(135deg, rgba(34,197,94,.18), rgba(59,130,246,.18)); border:1px solid var(--line)">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.2-3.4-1.2a2.7 2.7 0 0 0-1.1-1.5c-.9-.6.1-.6.1-.6a2.1 2.1 0 0 1 1.5 1 2.1 2.1 0 0 0 2.9.8 2.1 2.1 0 0 1 .6-1.3c-2.2-.3-4.6-1.1-4.6-4.9A3.9 3.9 0 0 1 6.8 7.6c.3-.8.3-1.8.1-2.6 0 0 .8-.3 2.7 1a9.5 9.5 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .4.8.4 1.8.1 2.6a3.9 3.9 0 0 1 1 2.7c0 3.8-2.3 4.7-4.6 4.9.4.3.7.9.7 1.8v2.7c0 .3.2.6.7.5A10 10 0 0 0 12 2z" fill="currentColor"/></svg>
+            </div>
+            <div>
+              <div><strong>GitHub</strong></div>
+              <div class="subtle"><a href="#" target="_blank" rel="noopener">github.com/iwanhermawan29</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container" style="display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap">
+      <span>© <span id="year"></span> • Iwan Hermawan — Portofolio</span>
+      <span class="subtle">Dibuat oleh ♥, Iwan Hermawan.</span>
+    </div>
+  </footer>
+
+  <!-- Lightbox Modal -->
+<div id="lightbox" class="lb" aria-hidden="true" role="dialog" aria-label="Preview gambar proyek">
+    <button class="lb-close" aria-label="Tutup pratinjau">×</button>
+    <div style="display:flex; flex-direction:column; align-items:center; gap:8px">
+      <img id="lb-img" alt="Preview proyek" />
+      <div id="lb-cap" class="lb-cap"></div>
+    </div>
+  </div>
+  
+
+  <!-- Back to top -->
+  <a href="#home" class="to-top" id="toTop" aria-label="Kembali ke atas">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 5l-7 7h5v7h4v-7h5z" fill="currentColor"/></svg>
+  </a>
+
+  <script>
+    // Tahun otomatis
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Smooth scroll (native di browser modern; fallback kecil)
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{ const id=a.getAttribute('href'); if(id.length>1){ e.preventDefault(); document.querySelector(id)?.scrollIntoView({behavior:'smooth'}) } });
+    });
+
+    // ========= Lightbox =========
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lb-img');
+const lbCap = document.getElementById('lb-cap');
+const lbClose = document.querySelector('.lb-close');
+
+function openLB(src, title, stack){
+  lbImg.src = src; lbImg.alt = title || 'Preview proyek';
+  lbCap.textContent = title + (stack ? ' — ' + stack : '');
+  lb.classList.add('show');
+  lb.setAttribute('aria-hidden','false');
+  document.body.style.overflow='hidden';
+  lbClose.focus();
+}
+function closeLB(){
+  lb.classList.remove('show');
+  lb.setAttribute('aria-hidden','true');
+  lbImg.src='';
+  document.body.style.overflow='';
+}
+document.querySelectorAll('.work .thumb').forEach(a=>{
+  a.addEventListener('click', e=>{
+    e.preventDefault();
+    openLB(a.getAttribute('href'), a.dataset.title || '', a.dataset.stack || '');
+  });
+});
+lb.addEventListener('click', e=>{ if(e.target===lb) closeLB(); });
+lbClose.addEventListener('click', closeLB);
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeLB(); });
+
+
+    // Back to top toggle
+    const toTop = document.getElementById('toTop');
+    const toggleTop = () => { (window.scrollY>300) ? toTop.classList.add('show') : toTop.classList.remove('show') };
+    window.addEventListener('scroll', toggleTop); toggleTop();
+
+    // Demo handler form (tanpa backend)
+    function submitForm(ev){
+      ev.preventDefault();
+      const note = document.getElementById('form-note');
+      note.textContent = 'Terima kasih! Pesanmu sudah terkirim (simulasi).';
+      note.style.color = 'var(--brand)';
+      ev.target.reset();
+      return false;
+    }
+  </script>
 </body>
 </html>
